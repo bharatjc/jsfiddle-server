@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 const User = require("../model/User");
+require("dotenv").config();
 
 async function signup(req, res) {
   try {
@@ -59,7 +60,7 @@ async function login(req, res) {
     let validPassword = await bcrypt.compare(password, user.password);
     if (validPassword) {
       delete user.password;
-      const JWT_SECRET_KEY = "chhhup";
+      const JWT_SECRET_KEY = process.env.SECRET_KEY;
       let token = jwt.sign(user, JWT_SECRET_KEY);
       user.token = token;
       res.send({ data: user });
