@@ -4,6 +4,7 @@ const cors = require("cors");
 const authRoute = require("./route/auth");
 require("./config/database");
 const Joi = require("joi");
+const port = process.env.PORT;
 
 app.use(cors());
 
@@ -14,6 +15,6 @@ app.get("/", function (req, res) {
 
 app.use("/api", authRoute);
 
-app.listen(7000, () => {
+app.listen(port, () => {
   console.log("server is running");
 });
