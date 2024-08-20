@@ -28,7 +28,7 @@ function forgotPassword(req, res) {
       from: process.env.ADMIN_EMAIL,
       to: email,
       subject: "Reset your password",
-      text: `http://localhost:5173/resetpassword/${user._id}/${token}`,
+      text: `https://jsfiddleserver.onrender.com/${user._id}/${token}`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
