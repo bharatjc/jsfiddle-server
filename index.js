@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const authRoute = require("./route/auth");
-const forgotPasswordRoute = require("./route/forgotPassword");
+const forgotPasswordRoute = require("./route/forgotpassword");
 require("./config/database");
 const port = process.env.PORT;
 require("dotenv").config();
