@@ -28,7 +28,7 @@ function forgotPassword(req, res) {
       from: process.env.ADMIN_EMAIL,
       to: email,
       subject: "Reset your password",
-      text: `https://jsfiddle-clone-kojt1qnoq-bharatjcs-projects.vercel.app/resetpassword/${user._id}/${token}`,
+      text: `https://jsfiddle-clone.vercel.app/resetpassword/${user._id}/${token}`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
