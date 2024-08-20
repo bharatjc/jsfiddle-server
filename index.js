@@ -23,10 +23,12 @@ app.post("/api/forgotpassword", function (req, res) {
   const { email } = req.body;
   User.findOne({ email: email }).then((user) => {
     if (!user) {
-      return res.send({ status: "User doesnot exist!" });
+      return res.status(404).send({ status: "User does not exist!" });
     }
     const JWT_SECRET_KEY = process.env.SECRET_KEY;
-    const token = jwt.sign(user, JWT_SECRET_KEY);
+    const token = jwt.sign({ id: user._id }, JWT_SECRET_KEY, {
+      expiresIn: "1h",
+    });
     var transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -44,9 +46,10 @@ app.post("/api/forgotpassword", function (req, res) {
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
-        console.log(error);
+        console.error(error);
+        return res.status(500).send({ status: "Failed to send email" });
       } else {
-        return res.send({ status: "Success" });
+        return res.status(200).send({ status: "Success", info });
       }
     });
   });
