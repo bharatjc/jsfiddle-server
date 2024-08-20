@@ -6,7 +6,9 @@ require("./config/database");
 const Joi = require("joi");
 const port = process.env.PORT;
 const User = require("./model/User");
+const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 app.use(cors());
 
@@ -21,7 +23,7 @@ app.post("/api/forgotpassword", function (req, res) {
   const { email } = req.body;
   User.findOne({ email: email }).then((user) => {
     if (!user) {
-      return res.send({ status: "User didnot exist!" });
+      return res.send({ status: "User doesnot exist!" });
     }
     const JWT_SECRET_KEY = process.env.SECRET_KEY;
     const token = jwt.sign(user, JWT_SECRET_KEY);
