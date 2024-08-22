@@ -5,6 +5,6 @@ const { checkAuthentication } = require("../middleware/checkAuthentication");
 
 router.post("/savedata", checkAuthentication, savedata);
 router.get("/getdata", checkAuthentication, getdata);
-router.get("/gettitles", checkAuthentication, gettitles);
+router.get("/gettitles/:userId", checkAuthentication, gettitles);
 
 module.exports = router;
