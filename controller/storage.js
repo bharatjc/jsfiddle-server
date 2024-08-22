@@ -7,8 +7,8 @@ async function savedata(req, res) {
       title: Joi.string().required(),
       description: Joi.string().required(),
       html: Joi.string().required(),
-      css: Joi.string(),
-      js: Joi.string(),
+      css: Joi.string().allow(""),
+      js: Joi.string().allow(""),
     });
     let status = DataSchema.validate(req.body, {
       allowUnknown: true,
