@@ -1,15 +1,14 @@
 const Data = require("../model/Data");
 const Joi = require("joi");
-const sanitizeHtml = require("sanitize-html");
 
 async function savedata(req, res) {
   try {
     const DataSchema = Joi.object({
       title: Joi.string().required(),
       description: Joi.string().required(),
-      htmlcode: Joi.string().required(),
-      csscode: Joi.string(),
-      jscode: Joi.string(),
+      html: Joi.string().required(),
+      css: Joi.string(),
+      js: Joi.string(),
     });
     let status = DataSchema.validate(req.body, {
       allowUnknown: true,
@@ -27,19 +26,6 @@ async function savedata(req, res) {
         errors,
       });
     }
-
-    req.body.htmlcode = sanitizeHtml(req.body.htmlcode, {
-      allowedTags: [],
-      allowedAttributes: {},
-    });
-    req.body.csscode = sanitizeHtml(req.body.csscode, {
-      allowedTags: [],
-      allowedAttributes: {},
-    });
-    req.body.jscode = sanitizeHtml(req.body.jscode, {
-      allowedTags: [],
-      allowedAttributes: {},
-    });
 
     const existingData = await Data.findOne({ title: req.body.title });
     if (existingData) {
