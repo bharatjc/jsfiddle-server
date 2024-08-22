@@ -57,7 +57,7 @@ async function getdata(req, res) {
 
 async function gettitles(req, res) {
   try {
-    const user = req.body.userId;
+    const user = req.params.userId;
     const storedFiles = await Data.find({ user });
     const titles = storedFiles.map((doc) => doc.title);
     return res.send(titles);
