@@ -1,5 +1,6 @@
 const Data = require("../model/Data");
 const Joi = require("joi");
+const mongoose = require("mongoose");
 
 async function savedata(req, res) {
   try {
@@ -54,4 +55,16 @@ async function getdata(req, res) {
   }
 }
 
-module.exports = { savedata, getdata };
+async function gettitles(req, res) {
+  try {
+    const user = req.body.user;
+    const storedFiles = await Data.find({ user });
+    const titles = storedFiles.map((doc) => doc.title);
+    return res.send(titles);
+  } catch (err) {
+    console.error("Error retrieving titles:", err);
+    return res.status(500).send(`Error: ${err.message}`);
+  }
+}
+
+module.exports = { savedata, getdata, gettitles };
