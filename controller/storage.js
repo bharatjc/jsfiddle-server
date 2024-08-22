@@ -58,7 +58,8 @@ async function getdata(req, res) {
 async function gettitles(req, res) {
   try {
     const user = req.params.userId;
-    const storedFiles = await Data.find({ user });
+    const objectId = new mongoose.Types.ObjectId(user);
+    const storedFiles = await Data.find({ user: objectId });
     const titles = storedFiles.map((doc) => doc.title);
     return res.send(titles);
   } catch (err) {
