@@ -46,7 +46,7 @@ async function savedata(req, res) {
 
 async function getdata(req, res) {
   try {
-    const title = req.body;
+    const title = req.params.title;
     const result = await Data.find(title);
     res.send(result);
   } catch (error) {
