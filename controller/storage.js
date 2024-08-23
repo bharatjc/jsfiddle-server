@@ -47,7 +47,7 @@ async function savedata(req, res) {
 async function getdata(req, res) {
   try {
     const title = req.params.title;
-    const result = await Data.find(title);
+    const result = await Data.find({ title: title });
     res.send(result);
   } catch (error) {
     console.error("Error retrieving data:", error);
