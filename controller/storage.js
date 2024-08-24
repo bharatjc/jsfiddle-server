@@ -70,8 +70,8 @@ async function gettitles(req, res) {
 
 async function deletefile(req, res) {
   try {
-    const _id = req.params.id;
-    await Data.findByIdAndDelete(_id);
+    const title = req.params.title;
+    await Data.deleteOne({ title });
     return res.send("File removed successfully");
   } catch (err) {
     return res.send(`Error: ${err.message}`);

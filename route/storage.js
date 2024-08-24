@@ -11,6 +11,6 @@ const { checkAuthentication } = require("../middleware/checkAuthentication");
 router.post("/savedata", checkAuthentication, savedata);
 router.get("/getdata/:title", checkAuthentication, getdata);
 router.get("/gettitles/:userId", checkAuthentication, gettitles);
-router.delete("/deletefile/:id", checkAuthentication, deletefile);
+router.delete("/deletefile/:title", checkAuthentication, deletefile);
 
 module.exports = router;
