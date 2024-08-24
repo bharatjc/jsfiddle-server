@@ -68,4 +68,14 @@ async function gettitles(req, res) {
   }
 }
 
-module.exports = { savedata, getdata, gettitles };
+async function deletefile(req, res) {
+  try {
+    const _id = req.params.id;
+    await Data.findByIdAndDelete(_id);
+    return res.send("File removed successfully");
+  } catch (err) {
+    return res.send(`Error: ${err.message}`);
+  }
+}
+
+module.exports = { savedata, getdata, gettitles, deletefile };
